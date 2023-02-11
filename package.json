@@ -1,0 +1,56 @@
+{
+  "name": "graphql-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "start": "npm run codegen && ts-node -r tsconfig-paths/register src/index.ts",
+    "start:prod": "npm run codegen && npm run build && node ./dist/src/index.ts",
+    "dev": "nodemon",
+    "build": "npx tsc",
+    "prepare": "husky install",
+    "merge-schemas": "ts-node -r tsconfig-paths/register src/scripts/merge-schemas.ts",
+    "codegen": "npm run merge-schemas && graphql-codegen --config codegen.yml"
+  },
+  "lint-staged": {
+    "**/*.json": [
+      "npx prettier --write"
+    ],
+    "**/*.ts": [
+      "npx prettier --write",
+      "npx eslint"
+    ]
+  },
+  "author": "mykhailo-vavr",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.9.1",
+    "@graphql-tools/merge": "^9.0.0",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.7.1",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/typescript": "4.0.1",
+    "@graphql-codegen/typescript-resolvers": "4.0.1",
+    "@types/node": "^18.16.16",
+    "@types/uuid": "^9.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.33.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.1.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.4",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "^4.9.5"
+  }
+}

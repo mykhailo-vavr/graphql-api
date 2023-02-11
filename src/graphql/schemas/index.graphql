@@ -1,0 +1,80 @@
+# Do not change this file manually
+# All schemas here are merged programmatically from *.graphql files in this directory
+
+type Forum {
+  id: UUID!
+  name: String!
+  isPrivate: Boolean!
+  adminId: UUID
+  admin: User
+  users: [User!]!
+  messages: [Message!]!
+}
+
+input CreateForumInput {
+  name: String!
+  isPrivate: Boolean
+}
+
+type Query {
+  publicForums: [Forum!]!
+}
+
+type Mutation {
+  joinForum(forumId: UUID!): Boolean!
+  createForum(input: CreateForumInput!): Forum!
+}
+
+type Message {
+  id: UUID!
+  text: String!
+  createdAt: Date!
+  userId: UUID!
+  forumId: UUID!
+  user: User!
+  forum: Forum!
+}
+
+input CreateMessageInput {
+  text: String!
+  forumId: String!
+}
+
+type Mutation {
+  createMessage(input: CreateMessageInput!): Message!
+}
+
+type Request {
+  id: UUID!
+  adminId: UUID!
+  forumId: UUID!
+  userId: UUID!
+  admin: User!
+  forum: Forum!
+  user: User!
+}
+
+type Query {
+  userRequests: [Request!]!
+}
+
+type Mutation {
+  acceptRequest(requestId: UUID!): Boolean
+  refuseRequest(requestId: UUID!): Boolean
+}
+
+scalar Date
+
+scalar UUID
+
+type User {
+  id: UUID!
+  name: String!
+  pictureUrl: String!
+  forums: [Forum!]!
+}
+
+type Query {
+  currentUser: User
+}
+

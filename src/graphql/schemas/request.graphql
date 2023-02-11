@@ -1,0 +1,18 @@
+type Request {
+  id: UUID!
+  adminId: UUID!
+  forumId: UUID!
+  userId: UUID!
+  admin: User!
+  forum: Forum!
+  user: User!
+}
+
+type Query {
+  userRequests: [Request!]!
+}
+
+type Mutation {
+  acceptRequest(requestId: UUID!): Boolean
+  refuseRequest(requestId: UUID!): Boolean
+}

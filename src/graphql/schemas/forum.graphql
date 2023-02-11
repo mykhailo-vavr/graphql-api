@@ -1,0 +1,23 @@
+type Forum {
+  id: UUID!
+  name: String!
+  isPrivate: Boolean!
+  adminId: UUID
+  admin: User
+  users: [User!]!
+  messages: [Message!]!
+}
+
+input CreateForumInput {
+  name: String!
+  isPrivate: Boolean
+}
+
+type Query {
+  publicForums: [Forum!]!
+}
+
+type Mutation {
+  joinForum(forumId: UUID!): Boolean!
+  createForum(input: CreateForumInput!): Forum!
+}

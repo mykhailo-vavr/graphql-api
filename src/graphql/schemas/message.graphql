@@ -1,0 +1,18 @@
+type Message {
+  id: UUID!
+  text: String!
+  createdAt: Date!
+  userId: UUID!
+  forumId: UUID!
+  user: User!
+  forum: Forum!
+}
+
+input CreateMessageInput {
+  text: String!
+  forumId: String!
+}
+
+type Mutation {
+  createMessage(input: CreateMessageInput!): Message!
+}

@@ -1,0 +1,10 @@
+type User {
+  id: UUID!
+  name: String!
+  pictureUrl: String!
+  forums: [Forum!]!
+}
+
+type Query {
+  currentUser: User
+}
